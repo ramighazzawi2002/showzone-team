@@ -1,0 +1,233 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "sidebar navbar"
+    "sidebar content";
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  position: fixed;
+  width: 22rem;
+
+  height: 100vh;
+  z-index: 3;
+  padding-top: 2rem;
+}
+
+.ulbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+}
+
+.libar {
+  padding: 4rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.libar:hover {
+  background-color: #3dd2cd82;
+  border-right: 6px solid #3dd2cc;
+}
+
+.abar {
+  text-decoration: none;
+  color: black;
+  padding-left: 5px;
+}
+
+.navbar {
+  grid-area: navbar;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  background-color: #fff;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.inputbar {
+  width: 80%;
+  height: 4rem;
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.icon {
+  margin-left: 1rem;
+}
+
+.container {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.hero-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  width: 70%;
+}
+
+.hero img {
+  width: 110%;
+  display: block;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 95%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  padding-left: 25px;
+  padding-top: 25px;
+  color: #ebebeb;
+}
+
+.overlay-text {
+  font-size: 2rem;
+  background-color: rgba(54, 54, 54, 0.7);
+  padding: 1rem;
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  width: 19%;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 2px solid black;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.checkbox.checked {
+  background-color: #3dd2cc;
+  border: none;
+}
+
+.label {
+  font-size: 16px;
+}
+
+.container-c {
+  width: 77%;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(163px, 1fr));
+  margin-bottom: 40px;
+  grid-gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.logo {
+  color: #00c2cb;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+footer {
+  background-color: black;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+footer p {
+  margin: 0;
+}
+.cont {
+  display: flex;
+  justify-content: flex-start;
+  gap: 34%;
+}
