@@ -1,0 +1,314 @@
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar {
+            position: fixed;
+            width: 22rem;
+            background-color: #d6e8e8;
+            height: 100vh;
+            z-index: 3;
+        }
+        .ulbar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            list-style: none;
+            padding-top: 2rem;
+        }
+        .libar {
+            padding: 2rem;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            border-left: 5px solid #3DD2CC;
+        }
+        .libar:hover{
+            background-color: #2b6967;
+            
+        }
+        .abar {
+            text-decoration: none;
+            color: black;
+        }
+        .navbar {
+            width: calc(100% - 22rem);
+            display: flex;
+            justify-content: space-around;
+            height: 6rem;
+            padding: 0 2rem;
+            padding-top: 2rem;
+            margin-left:25rem ;
+
+        }
+        .searchbar {
+            
+            display: flex;
+            align-items: center;
+            width: 75%;
+            padding: 1rem;
+        }
+        .inputbar {
+            width: 80%;
+            border-radius: 2rem;
+            padding: 1rem;
+            margin-right: 1rem;
+        }
+        .imgeuserinnav {
+            width: 4rem;
+            border-radius: 50%;
+            margin-left: 2rem;
+        }
+        .fa-bell{
+            margin:  2rem ;
+            font-size: 2rem;
+        }
+        .containermoviedetails {
+            margin: 2rem auto;
+            margin-left:25rem ;
+            width: 75%;
+            background-color: rgb(255, 255, 255);
+            padding: 2rem;
+        }
+        .movie-poster {
+            position: relative;
+            width: 100%;
+        }
+        .imgposter {
+            width: 100%;
+            padding: 1rem;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .iconsposter {
+            font-size: 2rem;
+            padding: 1rem;
+            padding-left: 2rem;
+        }
+        .detailsmovie {
+            width: 100%;
+            padding: 2rem;
+        }
+        .h1namemovie {
+            padding: 2rem;
+            padding-bottom: 1.3rem;
+        }
+        .details {
+            font-size: 2rem;
+            padding-bottom: 1.3rem;
+        }
+        .credits {
+            font-size: 1.5rem;
+        }
+        .discussioovie {
+            padding-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .moreinf {
+            text-decoration: none;
+            color: #3DD2CC;
+            font-size: 1.5rem;
+        }
+        .infD {
+            padding: 1rem 1rem 1rem 0rem;
+        }
+        .comment-section {
+            padding: 1rem;
+            width: 100%;
+            height: fit-content;
+        }
+        #comment-input {
+            width: 100%;
+            height: 15rem;
+            box-sizing: border-box;
+            border-radius: 10px;
+            padding: 8px;
+            padding-left: 2rem;
+            margin-left: 1rem;
+            margin-bottom: 10px;
+            border: 1px solid #3DD2CC;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        #submit-comment {
+            background-color: #3dd2cdd3;
+            color: rgb(0, 0, 0);
+            padding: 8px 16px;
+            margin-left: 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        #submit-comment:hover {
+            background-color: #2b6967;
+        }
+        .comments {
+            margin-top: 10px;
+        }
+        .comment {
+            background-color: #f9f9f9;
+            border: 1px solid #3DD2CC;
+            border-radius: 4px;
+        }
+        .review {
+            padding-left: 2rem;
+        }
+        .h2review {
+            padding: 2rem 1rem 2rem 0rem;
+            font-size: 2rem;
+        }
+        .comment-text1 {
+            font-size: 1.5rem;
+            padding: 2rem 0 2rem 0;
+            font-weight: bold;
+            color: rgb(74, 74, 74);
+        }
+        .userinf {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: row;
+            padding: 2rem;
+            padding-bottom: 4rem;
+            border: 1px solid #3DD2CC;
+            margin-right: 2rem;
+            border-bottom: 2px solid #274a4967;
+            background-color: #3dd2cd41;
+            border-radius: 2rem;
+            margin: 1rem;
+            position: relative;
+        }
+        .userimg {
+            border-radius: 50%;
+            width: 4rem;
+        }
+        .user-name1 {
+            position: absolute;
+            left: 90px;
+            top: 1px;
+            padding-top: 2rem;
+            margin-bottom: 2rem;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        .EditDel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .edit-comment1,
+        .delete-comment1 {
+            width: 6rem;
+            margin: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            font-weight: bold;
+        }
+        .edit-comment1 {
+            background-color: #2b6967;
+            border: none;
+            color: white;
+        }
+        .delete-comment1 {
+            background-color: #d23d3d;
+            border: none;
+            color: white;
+        }
+        .commentslorem2 {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .navbar {
+                margin-left: 0;
+                width: 100%;
+                flex-direction: column;
+                height: auto;
+            }
+            .ulbar{
+                display: flex;
+                flex-direction: row;
+            }
+            .libar{
+                border-left:none;
+                font-size: 1.5rem;
+
+            }
+            
+            .searchbar {
+                width: 100%;
+                margin-top: 1rem;
+                padding: 1rem;
+            }
+            .containermoviedetails {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+            .comment-section {
+                padding-right: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .libar {
+                padding: 1rem;
+                font-size: 1.2rem;
+            }
+            .inputbar {
+                width: 70%;
+            }
+            .imgeuserinnav {
+                width: 3rem;
+            }
+            .details {
+                font-size: 1.5rem;
+            }
+            .credits, .discussioovie, .moreinf {
+                font-size: 1.2rem;
+            }
+            #comment-input {
+                height: 10rem;
+                margin-left: 0;
+            }
+            #submit-comment {
+                margin-left: 0;
+            }
+            .user-name1 {
+                font-size: 1.2rem;
+            }
+            .commentslorem2 {
+                font-size: 1.2rem;
+            }
+            .comment-text1 {
+                font-size: 1.2rem;
+            }
+            .h2review {
+                font-size: 1.5rem;
+            }
+        }
