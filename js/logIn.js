@@ -43,6 +43,9 @@ const loginForm = document.getElementById("login-form");
       const userData = emailSnapshot.val();
       if (userData.Password === password) {
         alert("Login is complete");
+        const firstName = userData.First_Name;
+        sessionStorage.setItem("firstName", firstName); // Save first name in session storage
+        window.location.href = "../index.html";
       } else {
         alert("Incorrect password");
       }
