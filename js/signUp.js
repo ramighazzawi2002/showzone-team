@@ -27,7 +27,6 @@ const db = getDatabase(app);
 
 sessionStorage.setItem("issuccess", false);
 
-
 let Signup_form_id_js = document.getElementById("Signup_form_id");
 
 let Password_Singup = document.getElementById("Password_Singup");
@@ -86,7 +85,7 @@ Sumbit_SingUp_js.addEventListener("click", async function (Sing_Up_Form) {
     return;
   }
 
-  let emailEncoded = Email_js.replace(".", "_"); // استبدال . بـ _ حتة يعمل
+  let emailEncoded = Email_js.replaceAll(".", "_"); // استبدال . بـ _ حتة يعمل
   let emailRef = ref(db, `AllUsers/${emailEncoded}`);
   let emailSnapshot = await get(emailRef);
   if (emailSnapshot.exists()) {
@@ -102,6 +101,6 @@ Sumbit_SingUp_js.addEventListener("click", async function (Sing_Up_Form) {
     Password: Password_Singup_js,
   });
   sessionStorage.setItem("issuccess", true);
-  
+  sessionStorage.setItem("id", emailEncoded);
   window.location.href = "../index.html";
 });
