@@ -1,39 +1,56 @@
-/*
-<div class="containeraboutus">
-        <section class="personal-information">
-          <h1>Personal Information</h1>
-          <div class="name">
-            <label for="">Name</label>
-            <input type="text" value="Tasneem Abuarqob" id="name" disabled />
-            <button id="updateName">Update Name</button>
-          </div>
-          <div class="email">
-            <label for="">Email</label>
-            <input type="email" value="Test@gmail.com" id="email" disabled />
-            <button id="updateEmail">Update Email</button>
-          </div>
-          <div class="name">
-            <label for="">Password</label>
-            <input type="password" value="********" id="password" disabled />
-            <button id="updatePassword">Update Password</button>
-          </div>
-          <div>
-            <button class="save-changes" id="saveChanges">Save Changes</button>
-          </div>
-        </section>
-      </div>
-      */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  update,
+  get,
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyAzRJMUA6qYsRrf-7NNi2KqvzPtaLZRSu0",
+  authDomain: "tv-shows-a6dfc.firebaseapp.com",
+  databaseURL:
+    "https://tv-shows-a6dfc-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "tv-shows-a6dfc",
+  storageBucket: "tv-shows-a6dfc.appspot.com",
+  messagingSenderId: "950780821633",
+  appId: "1:950780821633:web:6614119aa73d65008f8d80",
+  measurementId: "G-BLCV05YBNK",
+};
 
-const nameInput = document.getElementById("name");
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getDatabase(app);
+
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-const updateName = document.getElementById("updateName");
+const updateFirstName = document.getElementById("updateFirstName");
+const updateLastName = document.getElementById("updateLastName");
 const updateEmail = document.getElementById("updateEmail");
 const updatePassword = document.getElementById("updatePassword");
 const saveChanges = document.getElementById("saveChanges");
+const emailRef = ref(db, `AllUsers/${sessionStorage.getItem("id")}`);
+const emailSnapshot = await get(emailRef);
 
-updateName.addEventListener("click", () => {
-  nameInput.disabled = false;
+if (emailSnapshot.exists()) {
+  const userData = emailSnapshot.val();
+  firstName.value = userData.First_Name;
+  lastName.value = userData.Last_Name;
+  email.value = userData.Email;
+  password.value = userData.Password;
+}
+
+updateFirstName.addEventListener("click", () => {
+  firstName.disabled = false;
+});
+
+updateLastName.addEventListener("click", () => {
+  lastName.disabled = false;
 });
 
 updateEmail.addEventListener("click", () => {
@@ -45,7 +62,20 @@ updatePassword.addEventListener("click", () => {
 });
 
 saveChanges.addEventListener("click", () => {
-  nameInput.disabled = true;
+  const firstNameValue = firstName.value;
+  const lastNameValue = lastName.value;
+  const emailValue = email.value;
+  const passwordValue = password.value;
+
+  update(ref(db, `AllUsers/${sessionStorage.getItem("id")}`), {
+    First_Name: firstNameValue,
+    Last_Name: lastNameValue,
+    Email: emailValue,
+    Password: passwordValue,
+  });
+
+  firstName.disabled = true;
+  lastName.disabled = true;
   email.disabled = true;
   password.disabled = true;
 });

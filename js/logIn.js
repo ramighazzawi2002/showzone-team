@@ -26,27 +26,27 @@ const analytics = getAnalytics(app);
 const db = getDatabase(app);
 
 const loginForm = document.getElementById("login-form");
-  const loginEmail = document.getElementById("email_login");
-  const loginPassword = document.getElementById("login_pass");
-  const loginButton = document.getElementById("submit");
+const loginEmail = document.getElementById("email_login");
+const loginPassword = document.getElementById("login_pass");
+const loginButton = document.getElementById("submit");
 
-  loginButton.addEventListener("click", async function (event) {
-    event.preventDefault();
-    const email = loginEmail.value;
-    const password = loginPassword.value;
+loginButton.addEventListener("click", async function (event) {
+  event.preventDefault();
+  const email = loginEmail.value;
+  const password = loginPassword.value;
 
-    const emailEncoded = email.replace(".", "_"); // Encode email to match the database format
-    const emailRef = ref(db, `AllUsers/${emailEncoded}`);
-    const emailSnapshot = await get(emailRef);
+  const emailEncoded = email.replaceAll(".", "_"); // Encode email to match the database format
+  const emailRef = ref(db, `AllUsers/${emailEncoded}`);
+  const emailSnapshot = await get(emailRef);
 
-    if (emailSnapshot.exists()) {
-      const userData = emailSnapshot.val();
-      if (userData.Password === password) {
-        alert("Login is complete");
-      } else {
-        alert("Incorrect password");
-      }
+  if (emailSnapshot.exists()) {
+    const userData = emailSnapshot.val();
+    if (userData.Password === password) {
+      alert("Login is complete");
     } else {
-      alert("Email not found");
+      alert("Incorrect password");
     }
-  });
+  } else {
+    alert("Email not found");
+  }
+});
