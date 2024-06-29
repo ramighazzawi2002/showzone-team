@@ -6,5 +6,59 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/profile.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div class="sidebar" id="navbar">
+        <img src="../images/image 2.png" alt="" />
+        <ul class="ulbar">
+          <li class="libar"><a href="../index.html" class="abar">Home</a></li>
+          <li class="libar">
+            <a href="../pages/movies.html" class="abar">Series</a>
+          </li>
+          <li class="libar">
+            <a href="../pages/aboutUs.html" class="abar">About Us</a>
+          </li>
+          <li class="libar">
+            <a href="../pages/contactUs.html" class="abar">Contact Us</a>
+          </li>
+          <li class="libar"><a href="#" class="abar">Log Out</a></li>
+        </ul>
+      </div>
+      <!-- sidebar -->
+      <div class="navbar">
+        <div class="searchbar">
+          <input type="text" placeholder="Search..." class="inputbar" />
+          <i class="fa fa-bell"></i>
+          <img class="imgeuserinnav" src="../images/17.jpg" alt="" />
+        </div>
+        <!-- searchbar -->
+      </div>
+      <!-- navbar -->
+      <div class="containeraboutus">
+        <section class="personal-information">
+          <h1>Personal Information</h1>
+          <div class="name">
+            <label for="">Name</label>
+            <input type="text" value="Tasneem Abuarqob" id="name" disabled />
+            <button id="updateName">Update Name</button>
+          </div>
+          <div class="email">
+            <label for="">Email</label>
+            <input type="email" value="Test@gmail.com" id="email" disabled />
+            <button id="updateEmail">Update Email</button>
+          </div>
+          <div class="name">
+            <label for="">Password</label>
+            <input type="password" value="********" id="password" disabled />
+            <button id="updatePassword">Update Password</button>
+          </div>
+          <div>
+            <button class="save-changes" id="saveChanges">Save Changes</button>
+          </div>
+        </section>
+      </div>
+      <!-- containermoviedetails -->
+    </div>
+    <script src="../js/profile.js"></script>
+  </body>
 </html>
