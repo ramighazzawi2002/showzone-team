@@ -1,0 +1,160 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar {
+  position: fixed;
+  width: 22rem;
+  background-color: #d6e8e8;
+  height: 100vh;
+  z-index: 3;
+}
+.ulbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  padding-top: 2rem;
+}
+.libar {
+  padding: 4rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.abar {
+  text-decoration: none;
+  color: black;
+}
+.navbar {
+  width: calc(100% - 22rem);
+  display: flex;
+  justify-content: space-around;
+  height: 6rem;
+  padding: 0 2rem;
+  padding-top: 2rem;
+  margin-left: 25rem;
+}
+.searchbar {
+  display: flex;
+  align-items: center;
+  width: 75%;
+  padding: 1rem;
+}
+.inputbar {
+  width: 80%;
+  border-radius: 2rem;
+  padding: 1rem;
+  margin-right: 1rem;
+}
+.imgeuserinnav {
+  width: 4rem;
+  border-radius: 50%;
+  margin-left: 2rem;
+}
+.fa-bell {
+  margin: 2rem;
+  font-size: 2rem;
+}
+.containeraboutus {
+  margin: 2rem auto;
+  margin-left: 25rem;
+  width: 75%;
+  background-color: rgb(255, 255, 255);
+  padding: 2rem;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .navbar {
+    margin-left: 0;
+    width: 100%;
+    flex-direction: column;
+    height: auto;
+  }
+  .searchbar {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+  .containeraboutus {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+  .comment-section {
+    padding-right: 1rem;
+  }
+}
+
+.personal-information {
+  margin: 0 auto;
+  width: 70%;
+}
+.personal-information h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.personal-information label {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  font-weight: bold;
+}
+
+.personal-information input {
+  width: 100%;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-bottom: 1px solid #0c0c0c;
+  outline: none;
+}
+
+.personal-information > div {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.personal-information > div:last-child {
+  margin-bottom: 0;
+  height: 6rem;
+}
+
+.personal-information > div button {
+  position: absolute;
+  left: 88%;
+  top: 58%;
+  padding: 0.8rem;
+  background-color: #3dd2cc;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  width: 13rem;
+}
+
+@media (max-width: 480px) {
+  .libar {
+    padding: 2rem;
+    font-size: 1.5rem;
+  }
+  .inputbar {
+    width: 70%;
+  }
+  .imgeuserinnav {
+    width: 3rem;
+  }
+}
