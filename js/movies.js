@@ -1,31 +1,3 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import {
-  getDatabase,
-  ref,
-  push,
-  set,
-  update,
-  remove,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAzRJMUA6qYsRrf-7NNi2KqvzPtaLZRSu0",
-  authDomain: "tv-shows-a6dfc.firebaseapp.com",
-  databaseURL:
-    "https://tv-shows-a6dfc-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "tv-shows-a6dfc",
-  storageBucket: "tv-shows-a6dfc.appspot.com",
-  messagingSenderId: "950780821633",
-  appId: "1:950780821633:web:6614119aa73d65008f8d80",
-  measurementId: "G-BLCV05YBNK",
-};
-
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const database = getDatabase(app);
-
 function Series(name, genres, summary, image, rating, id, premiered, schedule) {
   this.name = name;
   this.genres = genres;
@@ -37,11 +9,14 @@ function Series(name, genres, summary, image, rating, id, premiered, schedule) {
   this.schedule = schedule.time;
 }
 
-fetch("https://api.tvmaze.com/shows")
-  .then((res) => res.json())
-  .then((json) => {
+
+const url = "https://api.tvmaze.com/shows";
+fetch(url)
+  .then(res => res.json())
+  .then(json => {
+
     const seriesArray = json.map(
-      (item) =>
+      item =>
         new Series(
           item.name,
           item.genres,
@@ -53,9 +28,6 @@ fetch("https://api.tvmaze.com/shows")
           item.schedule
         )
     );
-
-    const checkboxes = document.querySelectorAll(".checkbox");
-
     const getSelectedGenres = () => {
       const selectedGenres = Array.from(checkboxes)
         .filter((checkbox) => checkbox.checked)
@@ -84,14 +56,21 @@ fetch("https://api.tvmaze.com/shows")
           container.appendChild(cardGrid);
         }
 
+
         const card = document.createElement("div");
         card.className = "card";
 
-        const content = `<img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
+       const content = `
+          <a href="movieDetails.html">
+          <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
+          </a>
         `;
         card.innerHTML = content;
 
         container.lastElementChild.appendChild(card);
+        card.addEventListener("click", () => {
+        sessionStorage.setItem("movie", JSON.stringify(ele));
+      });
       });
     };
 
@@ -106,6 +85,6 @@ fetch("https://api.tvmaze.com/shows")
     // Initial display of all series
     displayMovies(seriesArray);
   })
-  .catch((err) => {
+  .catch(err => {
     console.error("error:" + err);
   });
