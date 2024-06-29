@@ -38,11 +38,16 @@ loginButton.addEventListener("click", async function (event) {
   const emailEncoded = email.replaceAll(".", "_"); // Encode email to match the database format
   const emailRef = ref(db, `AllUsers/${emailEncoded}`);
   const emailSnapshot = await get(emailRef);
-
-  if (emailSnapshot.exists()) {
-    const userData = emailSnapshot.val();
-    if (userData.Password === password) {
-      alert("Login is complete");
+    if (emailSnapshot.exists()) {
+      const userData = emailSnapshot.val();
+      if (userData.Password === password) {
+        alert("Login is complete");
+        const firstName = userData.First_Name;
+        sessionStorage.setItem("firstName", firstName); // Save first name in session storage
+        window.location.href = "../index.html";
+      } else {
+        alert("Incorrect password");
+      }
     } else {
       alert("Incorrect password");
     }
