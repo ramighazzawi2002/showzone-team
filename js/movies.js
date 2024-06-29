@@ -1,29 +1,31 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import {
-  getDatabase,
-  ref,
-  push,
-  set,
-  update,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+// import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+// import {
+//   getDatabase,
+//   ref,
+//   push,
+//   set,
+//   update,
+//   remove,
+//   get,
+// } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAzRJMUA6qYsRrf-7NNi2KqvzPtaLZRSu0",
-  authDomain: "tv-shows-a6dfc.firebaseapp.com",
-  databaseURL:
-    "https://tv-shows-a6dfc-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "tv-shows-a6dfc",
-  storageBucket: "tv-shows-a6dfc.appspot.com",
-  messagingSenderId: "950780821633",
-  appId: "1:950780821633:web:6614119aa73d65008f8d80",
-  measurementId: "G-BLCV05YBNK",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAzRJMUA6qYsRrf-7NNi2KqvzPtaLZRSu0",
+//   authDomain: "tv-shows-a6dfc.firebaseapp.com",
+//   databaseURL:
+//     "https://tv-shows-a6dfc-default-rtdb.europe-west1.firebasedatabase.app",
+//   projectId: "tv-shows-a6dfc",
+//   storageBucket: "tv-shows-a6dfc.appspot.com",
+//   messagingSenderId: "950780821633",
+//   appId: "1:950780821633:web:6614119aa73d65008f8d80",
+//   measurementId: "G-BLCV05YBNK",
+// };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const database = getDatabase(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
+// const database = getDatabase(app);
+
 function Series(name, genres, summary, image, rating, id, premiered, schedule) {
   this.name = name;
   this.genres = genres;
@@ -35,8 +37,7 @@ function Series(name, genres, summary, image, rating, id, premiered, schedule) {
   this.schedule = schedule.time;
 }
 
-const url = "https://api.tvmaze.com/shows";
-fetch(url)
+fetch("https://api.tvmaze.com/shows")
   .then(res => res.json())
   .then(json => {
     const seriesArray = json.map(
@@ -52,45 +53,83 @@ fetch(url)
           item.schedule
         )
     );
+    // seriesArray.forEach(series => {
+    //   const newSeriesRef = push(ref(database, "series"));
+    //   set(newSeriesRef, series)
+    //     .then(() => {
+    //       console.log("Data saved successfully.");
+    //     })
+    //     .catch(error => {
+    //       console.error("Error saving data: ", error);
+    //     });
+    // });
+    const checkboxes = document.querySelectorAll(".checkbox");
+    // const deleteData = () => {
+    //   const seriesRef = ref(database, "series");
+    //   return remove(seriesRef)
+    //     .then(() => {
+    //       console.log("Data deleted successfully.");
+    //     })
+    //     .catch(error => {
+    //       console.error("Error deleting data: ", error);
+    //     });
+    // };
+    // deleteData();
+    const getSelectedGenres = () => {
+      const selectedGenres = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.id);
 
-    seriesArray.forEach(series => {
-      const newSeriesRef = push(ref(database, "series"));
-      set(newSeriesRef, series)
-        .then(() => {
-          console.log("Data saved successfully.");
-        })
-        .catch(error => {
-          console.error("Error saving data: ", error);
-        });
-    });
+      return selectedGenres.length > 0 ? selectedGenres : null;
+    };
 
-    // عرض البيانات في الصفحة
-    let container = document.getElementById("mo");
-
-    seriesArray.forEach((ele, index) => {
-      if (index % 4 === 0) {
-        const cardGrid = document.createElement("div");
-
-        cardGrid.className = "card-grid";
-
-        container.appendChild(cardGrid);
+    const filterMoviesByGenre = (movies, selectedGenres) => {
+      if (!selectedGenres) {
+        return movies;
       }
+      return movies.filter(movie =>
+        movie.genres.some(genre => selectedGenres.includes(genre))
+      );
+    };
 
-      const card = document.createElement("div");
-      card.className = "card";
+    const displayMovies = movies => {
+      let container = document.getElementById("mo");
+      container.innerHTML = "";
 
-      const content = `
-          <a href="movieDetails.html">
-          <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
-          </a>
-        `;
-      card.innerHTML = content;
+      movies.forEach((ele, index) => {
+        if (index % 4 === 0) {
+          const cardGrid = document.createElement("div");
+          cardGrid.className = "card-grid";
+          container.appendChild(cardGrid);
+        }
 
-      container.lastElementChild.appendChild(card);
-      card.addEventListener("click", () => {
-        sessionStorage.setItem("movie", JSON.stringify(ele));
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const content = `
+           <a href="movieDetails.html">
+           <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
+           </a>
+         `;
+        card.innerHTML = content;
+
+        container.lastElementChild.appendChild(card);
+        card.addEventListener("click", () => {
+          sessionStorage.setItem("movie", JSON.stringify(ele));
+        });
+      });
+    };
+
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("change", () => {
+        const selectedGenres = getSelectedGenres();
+        const filteredMovies = filterMoviesByGenre(seriesArray, selectedGenres);
+        displayMovies(filteredMovies);
       });
     });
+
+    // Initial display of all series
+    displayMovies(seriesArray);
   })
   .catch(err => {
     console.error("error:" + err);
