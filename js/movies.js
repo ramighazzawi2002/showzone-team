@@ -38,10 +38,10 @@ function Series(name, genres, summary, image, rating, id, premiered, schedule) {
 }
 
 fetch("https://api.tvmaze.com/shows")
-  .then(res => res.json())
-  .then(json => {
+  .then((res) => res.json())
+  .then((json) => {
     const seriesArray = json.map(
-      item =>
+      (item) =>
         new Series(
           item.name,
           item.genres,
@@ -53,32 +53,13 @@ fetch("https://api.tvmaze.com/shows")
           item.schedule
         )
     );
-    // seriesArray.forEach(series => {
-    //   const newSeriesRef = push(ref(database, "series"));
-    //   set(newSeriesRef, series)
-    //     .then(() => {
-    //       console.log("Data saved successfully.");
-    //     })
-    //     .catch(error => {
-    //       console.error("Error saving data: ", error);
-    //     });
-    // });
+
     const checkboxes = document.querySelectorAll(".checkbox");
-    // const deleteData = () => {
-    //   const seriesRef = ref(database, "series");
-    //   return remove(seriesRef)
-    //     .then(() => {
-    //       console.log("Data deleted successfully.");
-    //     })
-    //     .catch(error => {
-    //       console.error("Error deleting data: ", error);
-    //     });
-    // };
-    // deleteData();
+
     const getSelectedGenres = () => {
       const selectedGenres = Array.from(checkboxes)
-        .filter(checkbox => checkbox.checked)
-        .map(checkbox => checkbox.id);
+        .filter((checkbox) => checkbox.checked)
+        .map((checkbox) => checkbox.id);
 
       return selectedGenres.length > 0 ? selectedGenres : null;
     };
@@ -87,12 +68,21 @@ fetch("https://api.tvmaze.com/shows")
       if (!selectedGenres) {
         return movies;
       }
-      return movies.filter(movie =>
-        movie.genres.some(genre => selectedGenres.includes(genre))
+      return movies.filter((movie) =>
+        movie.genres.some((genre) => selectedGenres.includes(genre))
       );
     };
 
-    const displayMovies = movies => {
+    const filterMoviesBySearch = (movies, searchQuery) => {
+      if (!searchQuery) {
+        return movies;
+      }
+      return movies.filter((movie) =>
+        movie.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    };
+
+    const displayMovies = (movies) => {
       let container = document.getElementById("mo");
       container.innerHTML = "";
 
@@ -120,17 +110,25 @@ fetch("https://api.tvmaze.com/shows")
       });
     };
 
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener("change", () => {
-        const selectedGenres = getSelectedGenres();
-        const filteredMovies = filterMoviesByGenre(seriesArray, selectedGenres);
-        displayMovies(filteredMovies);
-      });
+    const updateDisplay = () => {
+      const selectedGenres = getSelectedGenres();
+      const searchQuery = document.querySelector(".inputbar").value;
+      let filteredMovies = filterMoviesByGenre(seriesArray, selectedGenres);
+      filteredMovies = filterMoviesBySearch(filteredMovies, searchQuery);
+      displayMovies(filteredMovies);
+    };
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", updateDisplay);
     });
+
+    document
+      .querySelector(".inputbar")
+      .addEventListener("input", updateDisplay);
 
     // Initial display of all series
     displayMovies(seriesArray);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("error:" + err);
   });
