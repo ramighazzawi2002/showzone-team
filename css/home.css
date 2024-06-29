@@ -231,3 +231,23 @@ footer p {
   justify-content: flex-start;
   gap: 34%;
 }
+#alert {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: 40px;
+  margin-top: 12px;
+  background-color: rgb(0, 255, 0);
+  z-index: 200;
+  position: fixed;
+  left: 100%;
+  transform: translateX(-100%);
+  border-left: 3px solid rgb(0, 153, 0);
+  
+}
+.alert_text1 {
+  color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
