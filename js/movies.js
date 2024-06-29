@@ -6,6 +6,7 @@ import {
   push,
   set,
   update,
+  remove,
   get,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -48,16 +49,27 @@ fetch(url)
         )
     );
 
-    seriesArray.forEach((series) => {
-      const newSeriesRef = push(ref(database, "series"));
-      set(newSeriesRef, series)
-        .then(() => {
-          console.log("Data saved successfully.");
-        })
-        .catch((error) => {
-          console.error("Error saving data: ", error);
-        });
-    });
+    // seriesArray.forEach((series) => {
+    //   const newSeriesRef = push(ref(database, "series"));
+    //   set(newSeriesRef, series)
+    //     .then(() => {
+    //       console.log("Data saved successfully.");
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error saving data: ", error);
+    //     });
+    // });
+
+    // const deleteData = () => {
+    //   const seriesRef = ref(database, "series");
+    //   return remove(seriesRef)
+    //     .then(() => {
+    //       console.log("Data deleted successfully.");
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error deleting data: ", error);
+    //     });
+    // };
 
     // عرض البيانات في الصفحة
     let container = document.getElementById("mo");
@@ -85,3 +97,4 @@ fetch(url)
   .catch((err) => {
     console.error("error:" + err);
   });
+// deleteData();
