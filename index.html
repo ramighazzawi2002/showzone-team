@@ -50,7 +50,9 @@
           <div class="hero">
             <img src="hero.png" alt="Hero Image" />
             <div class="overlay">
-              <div class="overlay-text">Welcome to Movibes, Tasneem!</div>
+              <!-- <div class="overlay-text">Welcome to Movibes, Tasneem!</div> -->
+              <h1>Welcome to Our Website</h1>
+              <p id="welcome_message"></p>
             </div>
           </div>
 
@@ -106,6 +108,16 @@
         <p style="color: aliceblue;">&copy; 2024 Movie Website. All rights reserved.</p>
       </footer>
     </div>
+    </div>
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+      const firstName = sessionStorage.getItem("firstName");
+      if (firstName) {
+        const welcomeMessage = document.getElementById('welcome_message');
+        welcomeMessage.textContent = `Welcome, ${firstName}!`;
+      }
+    });
+    </script>
     <script  src="js/home.js"></script>
   </body>
 </html>
