@@ -24,37 +24,42 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const database = getDatabase(app);
-
-function Series(name, genres, summary, image, rating) {
+function Series(name, genres, summary, image, rating, id, premiered, schedule) {
   this.name = name;
   this.genres = genres;
   this.summary = summary;
   this.image = image.medium;
   this.rating = rating.average;
+  this.id = id;
+  this.premiered = premiered;
+  this.schedule = schedule.time;
 }
 
 const url = "https://api.tvmaze.com/shows";
 fetch(url)
-  .then((res) => res.json())
-  .then((json) => {
+  .then(res => res.json())
+  .then(json => {
     const seriesArray = json.map(
-      (item) =>
+      item =>
         new Series(
           item.name,
           item.genres,
           item.summary,
           item.image,
-          item.rating
+          item.rating,
+          item.id,
+          item.premiered,
+          item.schedule
         )
     );
 
-    seriesArray.forEach((series) => {
+    seriesArray.forEach(series => {
       const newSeriesRef = push(ref(database, "series"));
       set(newSeriesRef, series)
         .then(() => {
           console.log("Data saved successfully.");
         })
-        .catch((error) => {
+        .catch(error => {
           console.error("Error saving data: ", error);
         });
     });
@@ -75,13 +80,18 @@ fetch(url)
       card.className = "card";
 
       const content = `
-        <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
-      `;
+          <a href="movieDetails.html">
+          <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
+          </a>
+        `;
       card.innerHTML = content;
 
       container.lastElementChild.appendChild(card);
+      card.addEventListener("click", () => {
+        sessionStorage.setItem("movie", JSON.stringify(ele));
+      });
     });
   })
-  .catch((err) => {
+  .catch(err => {
     console.error("error:" + err);
   });
