@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 html {
@@ -66,7 +67,12 @@ html {
   align-items: center;
   width: 100%;
 }
-
+.searchbar img {
+  display: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
 .inputbar {
   width: 80%;
   height: 4rem;
@@ -74,8 +80,11 @@ html {
   padding: 1rem;
 }
 
-.icon {
+#icon {
   margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .container {
@@ -101,23 +110,24 @@ html {
 .hero img {
   width: 110%;
   display: block;
-  height: 100%;
+  height: 50%;
+  border-radius: 10px;
 }
 
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
-
-  width: 100%;
-  height: 95%;
+  width: 110%;
+  height: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: start;
-  align-items: start;
+  justify-content: center;
+  align-items: center;
   padding-left: 25px;
   padding-top: 25px;
   color: #ebebeb;
+  border-radius: 10px;
 }
 
 .overlay-text {
@@ -231,7 +241,8 @@ footer p {
   justify-content: flex-start;
   gap: 34%;
 }
-#alert {
+#alert,
+#alert2 {
   display: none;
   align-items: center;
   justify-content: center;
@@ -244,10 +255,15 @@ footer p {
   left: 100%;
   transform: translateX(-100%);
   border-left: 3px solid rgb(0, 153, 0);
-  
 }
-.alert_text1 {
+.alert_text1,
+.alert_text2 {
   color: rgb(0, 0, 0);
   font-size: 1.5rem;
   font-weight: bold;
+}
+#welcome_message {
+  font-size: 2rem;
+  width: 50%;
+  font-weight: 500;
 }

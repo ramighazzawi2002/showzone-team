@@ -9,6 +9,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <style>
       input[type="search"]:focus {
         outline: none;
@@ -20,7 +26,7 @@
     <div class="grid-container">
       <div id="alert">
         <div class="alert_text1">
-          <p>Account creation succeeded</p>
+          <p id="alert_message"></p>
         </div>
       </div>
       <div class="sidebar" id="navbar">
@@ -40,18 +46,18 @@
       <div class="navbar">
         <div class="searchbar">
           <input type="text" placeholder="🔎Search for series, TV shows..." class="inputbar" />
-          <span class="icon">mbdcfmndbc<i class="fa-solid fa-bell"></i></span>
-          <img src="images/17.jpg" alt="" />
+          <span id="icon"></span>
+          <img id="Image_logo_user" src="images/17.jpg" alt="" />
         </div>
       </div>
 
       <div class="container">
         <div class="hero-container">
           <div class="hero">
-            <img src="hero.png" alt="Hero Image" />
+            <img src="images/wxl-hellbound-4k-netflix-hd-show_80700.png" alt="Hero Image" />
             <div class="overlay">
               <!-- <div class="overlay-text">Welcome to Movibes, Tasneem!</div> -->
-              <h1>Welcome to Our Website</h1>
+              <h1 id="welcome_Website">Welcome to Our Website</h1>
               <p id="welcome_message"></p>
             </div>
           </div>
@@ -87,7 +93,7 @@
          
           <div id="mo" class="card-grid-container">
             <div id="ee"></div>
-           
+            <a id="movieDetails_user" href="pages/movieDetails.html"></a>
           </div>
           
         
@@ -109,15 +115,6 @@
       </footer>
     </div>
     </div>
-    <script>
-       document.addEventListener("DOMContentLoaded", function() {
-      const firstName = sessionStorage.getItem("firstName");
-      if (firstName) {
-        const welcomeMessage = document.getElementById('welcome_message');
-        welcomeMessage.textContent = `Welcome, ${firstName}!`;
-      }
-    });
-    </script>
     <script  src="js/home.js"></script>
   </body>
 </html>

@@ -1,13 +1,24 @@
 if (sessionStorage.getItem("issuccess") === "true") {
   let alert1 = document.getElementById("alert");
+  const alert_message = document.getElementById("alert_message");
   alert1.style.display = "flex";
-
+  alert_message.textContent = "Account creation succeeded";
   sessionStorage.setItem("issuccess", false);
   setTimeout(function () {
     alert1.style.display = "none";
   }, 5000);
 }
-
+if (sessionStorage.getItem("issuccess2") === "true") {
+  let alert1 = document.getElementById("alert");
+  const alert_message = document.getElementById("alert_message");
+  alert1.style.display = "flex";
+  alert_message.textContent = "Login succeeded";
+  sessionStorage.setItem("issuccess2", false);
+  setTimeout(function () {
+    alert1.style.display = "none";
+  }, 5000);
+}
+const firstName = sessionStorage.getItem("firstName");
 function Series(name, genres, summary, image, rating, id, premiered, schedule) {
   this.name = name;
   this.genres = genres;
@@ -105,13 +116,21 @@ fetch(url)
         }
 
         const card = document.createElement("div");
+        let content;
         card.className = "card";
-
-        const content = `
-          <a href="pages/movieDetails.html">
+        if (firstName) {
+          content = `
+  <a href="pages/movieDetails.html">
+  <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
+  </a>
+`;
+        } else {
+          content = `
+          <a href="pages/login.html">
           <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
           </a>
         `;
+        }
         card.innerHTML = content;
 
         container.lastElementChild.appendChild(card);
@@ -149,3 +168,15 @@ fetch(url)
   .catch((err) => {
     console.error("error:" + err);
   });
+document.addEventListener("DOMContentLoaded", function () {
+  const welcome_Website = document.getElementById("welcome_Website");
+  const Name_User = document.getElementById("icon");
+  const Image_logo_user = document.getElementById("Image_logo_user");
+  if (firstName) {
+    welcome_Website.style.display = "none";
+    Image_logo_user.style.display = "inline";
+    const welcomeMessage = document.getElementById("welcome_message");
+    welcomeMessage.textContent = `Welcome, ${firstName}, to Move! We hope you have the best possible experience here.`;
+    Name_User.innerHTML = `${firstName}`;
+  }
+});
