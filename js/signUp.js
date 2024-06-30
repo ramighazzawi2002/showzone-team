@@ -37,7 +37,7 @@ let Number_Passward_p_js = document.getElementById("Number_Passward_p");
 let Special_Characters_p_js = document.getElementById("Special_Characters_p");
 let Email_p_div_js = document.getElementById("Email_p_div");
 let Sumbit_SingUp_js = document.getElementById("Sumbit_SingUp");
-
+let You_are_registered_js = document.getElementById("You_are_registered");
 Password_Singup.addEventListener("input", function checkPassword() {
   let Verification_Password = Signup_form_id_js.Password_Singup.value;
   Passward_p_div_js.style.display = "inline";
@@ -89,7 +89,7 @@ Sumbit_SingUp_js.addEventListener("click", async function (Sing_Up_Form) {
   let emailRef = ref(db, `AllUsers/${emailEncoded}`);
   let emailSnapshot = await get(emailRef);
   if (emailSnapshot.exists()) {
-    alert("البريد الإلكتروني موجود بالفعل. يرجى استخدام بريد إلكتروني آخر.");
+    You_are_registered_js.style.display = "flex";
     return;
   }
 
@@ -100,6 +100,8 @@ Sumbit_SingUp_js.addEventListener("click", async function (Sing_Up_Form) {
     Email: Email_js,
     Password: Password_Singup_js,
   });
+  const firstName = First_Name_js;
+  sessionStorage.setItem("firstName", firstName);
   sessionStorage.setItem("issuccess", true);
   sessionStorage.setItem("id", emailEncoded);
   window.location.href = "../index.html";

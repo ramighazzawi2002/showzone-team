@@ -1,13 +1,24 @@
 if (sessionStorage.getItem("issuccess") === "true") {
   let alert1 = document.getElementById("alert");
+  const alert_message = document.getElementById("alert_message");
   alert1.style.display = "flex";
-
+  alert_message.textContent = "Account creation succeeded";
   sessionStorage.setItem("issuccess", false);
   setTimeout(function () {
     alert1.style.display = "none";
   }, 5000);
 }
-
+if (sessionStorage.getItem("issuccess2") === "true") {
+  let alert1 = document.getElementById("alert");
+  const alert_message = document.getElementById("alert_message");
+  alert1.style.display = "flex";
+  alert_message.textContent = "Login succeeded";
+  sessionStorage.setItem("issuccess2", false);
+  setTimeout(function () {
+    alert1.style.display = "none";
+  }, 5000);
+}
+const firstName = sessionStorage.getItem("firstName");
 function Series(name, genres, summary, image, rating, id, premiered, schedule) {
   this.name = name;
   this.genres = genres;
@@ -85,14 +96,14 @@ fetch(url)
       );
     };
 
-    const displayMovies = (movies, limit = 16) => {
+    const displayMovies = (movies, limit = 18) => {
       let container = document.getElementById("mo");
       container.innerHTML = "";
 
       let i = 0;
 
       movies.slice(0, limit).forEach((ele, index) => {
-        if (index % 4 === 0) {
+        if (index % 6 === 0) {
           const cardGrid = document.createElement("div");
           const batata = document.createElement("div");
           batata.innerHTML = arrayyys[i] ?? "";
@@ -105,13 +116,21 @@ fetch(url)
         }
 
         const card = document.createElement("div");
+        let content;
         card.className = "card";
-
-        const content = `
-          <a href="pages/movieDetails.html">
+        if (firstName) {
+          content = `
+  <a href="pages/movieDetails.html">
+  <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
+  </a>
+`;
+        } else {
+          content = `
+          <a href="pages/login.html">
           <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
           </a>
         `;
+        }
         card.innerHTML = content;
 
         container.lastElementChild.appendChild(card);
@@ -131,7 +150,7 @@ fetch(url)
       if (selectedGenres || searchQuery) {
         displayMovies(filteredMovies, filteredMovies.length);
       } else {
-        displayMovies(filteredMovies, 16);
+        displayMovies(filteredMovies, 18);
       }
     };
 
@@ -144,8 +163,37 @@ fetch(url)
       .addEventListener("input", updateDisplay);
 
     // Initial display of all series
-    displayMovies(seriesArray, 16);
+    displayMovies(seriesArray, 18);
   })
   .catch((err) => {
     console.error("error:" + err);
   });
+document.addEventListener("DOMContentLoaded", function () {
+  const welcome_Website = document.getElementById("welcome_Website");
+  const Name_User = document.getElementById("icon");
+  const Image_logo_user = document.getElementById("Image_logo_user");
+  const Log_In_js = document.getElementById("Log_In");
+  const Logo_user_2 = document.getElementById("Logo_user_2");
+  if (firstName) {
+    if (welcome_Website) welcome_Website.style.display = "none";
+    if (Log_In_js) Log_In_js.style.display = "none";
+    if (Logo_user_2) Logo_user_2.style.display = "inline";
+
+    const welcomeMessage = document.getElementById("welcome_message");
+    if (welcomeMessage) welcomeMessage.textContent = `Welcome ${firstName}`;
+    if (Name_User) Name_User.innerHTML = `${firstName}`;
+  }
+
+  if (Log_Out_user) {
+    Log_Out_user.addEventListener("click", function () {
+      // إزالة بيانات المستخدم من sessionStorage
+      sessionStorage.removeItem("firstName");
+      sessionStorage.removeItem("issuccess");
+      sessionStorage.removeItem("issuccess2");
+      sessionStorage.removeItem("movie");
+
+      // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+      window.location.href = "pages/login.html";
+    });
+  }
+});
