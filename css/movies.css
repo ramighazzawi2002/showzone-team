@@ -153,3 +153,11 @@
   margin-bottom: 0;
 }
 /* End Footer */
+
+.card img {
+  transition: 0.3s;
+}
+.card:hover img {
+  transform: scale(1.2);
+  filter: brightness(0.3);
+}

@@ -38,10 +38,10 @@ function Series(name, genres, summary, image, rating, id, premiered, schedule) {
 }
 
 fetch("https://api.tvmaze.com/shows")
-  .then((res) => res.json())
-  .then((json) => {
+  .then(res => res.json())
+  .then(json => {
     const seriesArray = json.map(
-      (item) =>
+      item =>
         new Series(
           item.name,
           item.genres,
@@ -58,8 +58,8 @@ fetch("https://api.tvmaze.com/shows")
 
     const getSelectedGenres = () => {
       const selectedGenres = Array.from(checkboxes)
-        .filter((checkbox) => checkbox.checked)
-        .map((checkbox) => checkbox.id);
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.id);
 
       return selectedGenres.length > 0 ? selectedGenres : null;
     };
@@ -68,8 +68,8 @@ fetch("https://api.tvmaze.com/shows")
       if (!selectedGenres) {
         return movies;
       }
-      return movies.filter((movie) =>
-        movie.genres.some((genre) => selectedGenres.includes(genre))
+      return movies.filter(movie =>
+        movie.genres.some(genre => selectedGenres.includes(genre))
       );
     };
 
@@ -77,12 +77,12 @@ fetch("https://api.tvmaze.com/shows")
       if (!searchQuery) {
         return movies;
       }
-      return movies.filter((movie) =>
+      return movies.filter(movie =>
         movie.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     };
 
-    const displayMovies = (movies) => {
+    const displayMovies = movies => {
       let container = document.getElementById("mo");
       container.innerHTML = "";
 
@@ -97,15 +97,37 @@ fetch("https://api.tvmaze.com/shows")
         card.className = "card";
 
         const content = `
-           <a href="movieDetails.html">
-           <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
-           </a>
-         `;
-        card.innerHTML = content;
+        <div style = "margin:0; position:relative">
+          <a href="pages/movieDetails.html">
+          <img src="${ele.image}" alt="${
+          ele.name
+        }" style="width:100%; height:100%;">
+          </a>
+          <div class="container" style="position: absolute; bottom:0; left:0; color:#fff; cursor:pointer; opacity:0; transition:.5s">
 
+          <p style="font-size: 20px; font-weight: bold; margin: 0; padding: 0;">${
+            ele.name
+          }</p>
+          <p style="font-size: 15px; margin: 0; padding: 0;">${ele.genres.join(
+            ", "
+          )}</p>
+            
+          </div>
+        `;
+        card.innerHTML = content;
+        card.onclick = function () {
+          location.href = "pages/movieDetails.html";
+        };
         container.lastElementChild.appendChild(card);
         card.addEventListener("click", () => {
           sessionStorage.setItem("movie", JSON.stringify(ele));
+        });
+        card.addEventListener("mouseover", () => {
+          sessionStorage.setItem("movieOver", JSON.stringify(ele));
+          card.querySelector(".container").style.opacity = 1;
+        });
+        card.addEventListener("mouseout", () => {
+          card.querySelector(".container").style.opacity = 0;
         });
       });
     };
@@ -118,7 +140,7 @@ fetch("https://api.tvmaze.com/shows")
       displayMovies(filteredMovies);
     };
 
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach(checkbox => {
       checkbox.addEventListener("change", updateDisplay);
     });
 
@@ -129,7 +151,7 @@ fetch("https://api.tvmaze.com/shows")
     // Initial display of all series
     displayMovies(seriesArray);
   })
-  .catch((err) => {
+  .catch(err => {
     console.error("error:" + err);
   });
 document.addEventListener("DOMContentLoaded", function () {
