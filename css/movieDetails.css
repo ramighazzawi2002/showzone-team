@@ -119,10 +119,78 @@
   }
   
   /* End NavBar */
-  .comment-section {
+  html {
+    font-size: 10px;
+}
+
+.containermoviedetails {
+margin: 2rem auto;
+width: 75%;
+background-color: rgb(255, 255, 255);
+padding: 2rem;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.movie-poster {
+position: relative;
+width: 100%;
+}
+.imgposter {
+
+height: 30%;
+padding: 1rem;
+}
+.play-button {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: rgba(0, 0, 0, 0.5);
+border: none;
+color: white;
+font-size: 2rem;
+padding: 1rem;
+border-radius: 50%;
+cursor: pointer;
+}
+.iconsposter {
+font-size: 2rem;
+padding: 1rem;
+padding-left: 2rem;
+}
+.detailsmovie {
+width: 100%;
+padding: 2rem;
+}
+.h1namemovie {
+padding: 2rem;
+padding-bottom: 1.3rem;
+}
+.details {
+font-size: 2rem;
+padding-bottom: 1.3rem;
+}
+.credits {
+font-size: 1.5rem;
+}
+.discussioovie {
+padding-bottom: 1rem;
+font-size: 1.5rem;
+}
+.moreinf {
+text-decoration: none;
+color: #3DD2CC;
+font-size: 1.5rem;
+}
+.infD {
+padding: 1rem 1rem 1rem 0rem;
+}
+
+
+/* Comment Section */
+.comment-section {
     width: 100%;
     padding: 1rem;
-    
 }
 
 #comment-input {
@@ -131,12 +199,12 @@
     padding: 8px;
     border-radius: 10px;
     border: 3px solid #ccc;
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Adjusted font size */
     resize: vertical;
 }
 
 #submit-comment {
-    background-color: #1877f2; /* Facebook blue */
+    background-color: #1d5c5a; /* Facebook blue */
     color: #fff;
     padding: 8px 16px;
     border: none;
@@ -144,11 +212,11 @@
     border-radius: 4px;
     font-weight: bold;
     width: 100px;
-    font-size: 1rem;
+    font-size: 1rem; /* Adjusted font size */
 }
 
 #submit-comment:hover {
-    background-color: #145dbf; /* Darker shade for hover */
+    background-color: #0e5a8a; /* Darker shade for hover */
 }
 
 .comment {
@@ -159,8 +227,6 @@
 }
 
 .comment .userinf {
-    display: flex;
-    align-items: center;
     margin-bottom: 10px;
 }
 
@@ -173,13 +239,14 @@
 
 .comment .user-name1 {
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.3rem; /* Adjusted font size */
     color: #333333;
 }
 
 .comment .commentslorem2 {
-    font-size: 1rem;
-    color: #333333;
+    font-size: 1rem; /* Adjusted font size */
+    color: rgb(0, 0, 0);
+    font-size: 20px;
 }
 
 .comment .edit-comment1,
@@ -187,7 +254,7 @@
     margin-left: auto;
     padding: 5px 10px;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 1rem; /* Adjusted font size */
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -196,6 +263,24 @@
 .comment .edit-comment1 {
     background-color: #1877f2; /* Facebook blue */
     border: none;
+
+}
+.coomentsDD{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reply-button{
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: none;
+    background-color: #cad6de ;
+    font-size: 2rem;
+
+}
+.reply-button:hover{
+    background-color: #595e5e;
 }
 
 .comment .delete-comment1 {
@@ -208,39 +293,22 @@
     filter: brightness(85%);
 }
 
-.coomentsDD {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.reply-button {
-    background-color: #ffffff;
-    border-radius: 3px;
-    border: none;
-    background-color: #cad6de;
-    font-size: 1rem; /* Adjusted font size */
-}
-
-.reply-button:hover {
-    background-color: #a1a2a5;
-}
-
 /* Replies Section */
 .reply-section {
     margin-top: 10px;
-    padding-left: 40px; /* Indent replies */
+    
 }
 
 .reply-input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #817979;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1rem; /* Adjusted font size */
     resize: vertical;
+    
 }
+
 
 .replies {
     margin-top: 10px;
@@ -248,14 +316,14 @@
 
 .reply {
     padding: 10px;
-    background-color: #e4e6eb; /* Lighter gray background for replies */
-    border-radius: 10px;
+    background-color: #a1a2a5; /* Lighter gray background for replies */
+    border-radius: 5px;
     margin-top: 10px;
+    
 }
 
 .reply .userinf {
-    display: flex;
-    align-items: center;
+    
     margin-bottom: 5px;
 }
 
@@ -268,46 +336,51 @@
 
 .reply .user-name1 {
     font-weight: bold;
-    font-size: 1rem;
-    color: #333333;
+    font-size: 1rem; /* Adjusted font size */
+    color: #333;
 }
 
 .reply .commentslorem2 {
-    font-size: 1rem;
-    color: #333333;
+    font-size: 0.9rem; /* Adjusted font size */
+    color: #555;
 }
 
 .submit-reply {
-    background-color: #1877f2; /* Facebook blue */
-    color: white;
+    background-color: #1d5c5a; /* Facebook blue */
+    color: black;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    font-size: 1rem;
+    font-size: 1rem; /* Adjusted font size */
     font-weight: bold;
     width: 100px;
 }
 
 .submit-reply:hover {
-    background-color: #145dbf; /* Darker shade for hover */
+    background-color: #0e5a8a; /* Darker shade for hover */
 }
 
 .commentslorem2 {
-    font-size: 1rem;
+    font-size: 30px; /* Adjusted font size */
     font-weight: bold;
 }
 
-.userinf {
-    display: flex;
-    align-items: center;
+.userinf{
+   display: flex;
+   flex-direction: column;
 }
 
-.EditDel {
+.EditDel{
     display: flex;
     flex-direction: column;
     justify-content: end;
+    
+    
 }
+
+
+
 
   /* Start Footer */
 .footer_home {
