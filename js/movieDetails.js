@@ -76,7 +76,7 @@ function retrieveData() {
            <i class="fa fa-bookmark"></i>
            <i class="fa fa-heart"></i>
            <i class="fa fa-share"></i>
-           <span class="rating">:star: ${item.rating} | 350k</span>
+           <span class="rating">⭐${item.rating} | 350k</span>
          </div>
        </div>
        <div class="detailsmovie">
