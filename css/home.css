@@ -24,11 +24,12 @@
   color: var(--black);
 }
 
-.nav-link:hover,
-.dropdown-menu a:hover {
+.nav-link:hover {
   color: var(--blue-1);
 }
-
+.dropdown-menu a:hover:hover {
+  color:#007c9b;
+}
 .dropdown-menu-fullscreen {
   top: 50px; /* Adjust this value based on your navbar height */
   position: absolute;
@@ -96,6 +97,7 @@
 }
 .logo_user_1 {
   border-radius: 100%;
+  filter: invert(1);
 }
 #Logo_user_2 {
   display: none;
@@ -191,7 +193,7 @@
 }
 .alert_text1 {
   color: rgb(0, 0, 0);
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 500;
   margin-bottom: 0 !important;
 }

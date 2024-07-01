@@ -19,11 +19,32 @@ if (sessionStorage.getItem("issuccess2") === "true") {
   }, 5000);
 }
 const firstName = sessionStorage.getItem("firstName");
-function Series(name, genres, summary, image, rating, id, premiered, schedule) {
+if (sessionStorage.getItem("issuccess") === "true") {
+  let alert1 = document.getElementById("alert");
+  alert1.style.display = "flex";
+
+  sessionStorage.setItem("issuccess", false);
+  setTimeout(function () {
+    alert1.style.display = "none";
+  }, 5000);
+}
+
+function Series(
+  name,
+  genres,
+  summary,
+  image,
+  image2,
+  rating,
+  id,
+  premiered,
+  schedule
+) {
   this.name = name;
   this.genres = genres;
   this.summary = summary;
   this.image = image.medium;
+  this.image2 = image.original;
   this.rating = rating.average;
   this.id = id;
   this.premiered = premiered;
@@ -34,6 +55,7 @@ const url = "https://api.tvmaze.com/shows";
 fetch(url)
   .then((res) => res.json())
   .then((json) => {
+    console.log(json);
     const seriesArray = json.map(
       (item) =>
         new Series(
@@ -41,6 +63,7 @@ fetch(url)
           item.genres,
           item.summary,
           item.image,
+          item.image2,
           item.rating,
           item.id,
           item.premiered,
@@ -64,17 +87,11 @@ fetch(url)
       "TV Series",
       "Popular movies in September",
     ];
+
     const filterMoviesByGenre = (movies, selectedGenres) => {
       if (!selectedGenres) {
-        arrayyys = [
-          "Trending",
-          "Upcoming",
-          "TV Series",
-          "Popular movies in September",
-        ];
         return movies;
       }
-      arrayyys = "";
       return movies.filter((movie) =>
         movie.genres.some((genre) => selectedGenres.includes(genre))
       );
@@ -82,15 +99,8 @@ fetch(url)
 
     const filterMoviesBySearch = (movies, searchQuery) => {
       if (!searchQuery) {
-        arrayyys = [
-          "Trending",
-          "Upcoming",
-          "TV Series",
-          "Popular movies in September",
-        ];
         return movies;
       }
-      arrayyys = "";
       return movies.filter((movie) =>
         movie.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
@@ -106,31 +116,25 @@ fetch(url)
         if (index % 6 === 0) {
           const cardGrid = document.createElement("div");
           const batata = document.createElement("div");
+
           batata.innerHTML = arrayyys[i] ?? "";
           cardGrid.className = "card-grid";
           container.appendChild(batata);
           container.appendChild(cardGrid);
-          if (i < 4) {
+          if (i < 6) {
             i++;
           }
         }
 
         const card = document.createElement("div");
-        let content;
         card.className = "card";
-        if (firstName) {
-          content = `
-  <a href="pages/movieDetails.html">
-  <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
-  </a>
-`;
-        } else {
-          content = `
-          <a href="pages/login.html">
+
+        const content = `
+          <a href="pages/movieDetails.html">
           <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
+          
           </a>
         `;
-        }
         card.innerHTML = content;
 
         container.lastElementChild.appendChild(card);
@@ -143,6 +147,19 @@ fetch(url)
     const updateDisplay = () => {
       const selectedGenres = getSelectedGenres();
       const searchQuery = document.querySelector(".inputbar").value;
+
+      // Reset arrayyys based on filters
+      if (selectedGenres || searchQuery) {
+        arrayyys = "";
+      } else {
+        arrayyys = [
+          "Trending",
+          "Upcoming",
+          "TV Series",
+          "Popular movies in September",
+        ];
+      }
+
       let filteredMovies = filterMoviesByGenre(seriesArray, selectedGenres);
       filteredMovies = filterMoviesBySearch(filteredMovies, searchQuery);
 
