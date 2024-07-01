@@ -28,7 +28,7 @@
   color: var(--blue-1);
 }
 .dropdown-menu a:hover:hover {
-  color:#007c9b;
+  color: #007c9b;
 }
 .dropdown-menu-fullscreen {
   top: 50px; /* Adjust this value based on your navbar height */
@@ -199,4 +199,11 @@
 }
 #alert_message {
   margin-bottom: 0 !important;
+}
+.card img {
+  transition: 0.3s;
+}
+.card:hover img {
+  transform: scale(1.2);
+  filter: brightness(0.3);
 }

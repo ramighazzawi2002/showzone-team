@@ -53,11 +53,11 @@ function Series(
 
 const url = "https://api.tvmaze.com/shows";
 fetch(url)
-  .then((res) => res.json())
-  .then((json) => {
+  .then(res => res.json())
+  .then(json => {
     console.log(json);
     const seriesArray = json.map(
-      (item) =>
+      item =>
         new Series(
           item.name,
           item.genres,
@@ -75,8 +75,8 @@ fetch(url)
 
     const getSelectedGenres = () => {
       const selectedGenres = Array.from(checkboxes)
-        .filter((checkbox) => checkbox.checked)
-        .map((checkbox) => checkbox.id);
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.id);
 
       return selectedGenres.length > 0 ? selectedGenres : null;
     };
@@ -92,8 +92,8 @@ fetch(url)
       if (!selectedGenres) {
         return movies;
       }
-      return movies.filter((movie) =>
-        movie.genres.some((genre) => selectedGenres.includes(genre))
+      return movies.filter(movie =>
+        movie.genres.some(genre => selectedGenres.includes(genre))
       );
     };
 
@@ -101,7 +101,7 @@ fetch(url)
       if (!searchQuery) {
         return movies;
       }
-      return movies.filter((movie) =>
+      return movies.filter(movie =>
         movie.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     };
@@ -130,16 +130,37 @@ fetch(url)
         card.className = "card";
 
         const content = `
+        <div style = "margin:0; position:relative">
           <a href="pages/movieDetails.html">
-          <img src="${ele.image}" alt="${ele.name}" style="width:100%; height:auto;">
-          
+          <img src="${ele.image}" alt="${
+          ele.name
+        }" style="width:100%; height:100%;">
           </a>
+          <div class="container" style="position: absolute; bottom:0; left:0; color:#fff; cursor:pointer; opacity:0; transition:.5s">
+
+          <p style="font-size: 20px; font-weight: bold; margin: 0; padding: 0;">${
+            ele.name
+          }</p>
+          <p style="font-size: 15px; margin: 0; padding: 0;">${ele.genres.join(
+            ", "
+          )}</p>
+            
+          </div>
         `;
         card.innerHTML = content;
-
+        card.onclick = function () {
+          location.href = "pages/movieDetails.html";
+        };
         container.lastElementChild.appendChild(card);
         card.addEventListener("click", () => {
           sessionStorage.setItem("movie", JSON.stringify(ele));
+        });
+        card.addEventListener("mouseover", () => {
+          sessionStorage.setItem("movieOver", JSON.stringify(ele));
+          card.querySelector(".container").style.opacity = 1;
+        });
+        card.addEventListener("mouseout", () => {
+          card.querySelector(".container").style.opacity = 0;
         });
       });
     };
@@ -171,7 +192,7 @@ fetch(url)
       }
     };
 
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach(checkbox => {
       checkbox.addEventListener("change", updateDisplay);
     });
 
@@ -182,7 +203,7 @@ fetch(url)
     // Initial display of all series
     displayMovies(seriesArray, 18);
   })
-  .catch((err) => {
+  .catch(err => {
     console.error("error:" + err);
   });
 document.addEventListener("DOMContentLoaded", function () {
