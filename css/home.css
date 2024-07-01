@@ -114,6 +114,10 @@
     margin-top: 20px;
     margin-left: 0 !important;
   }
+  .dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: -78px;
+  }
 }
 
 /* End NavBar */
@@ -167,6 +171,7 @@
 .footer_home .col-md-4 {
   margin-bottom: 0;
 }
+
 /* End Footer */
 /* alert */
 #alert {
