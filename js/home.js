@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
       sessionStorage.removeItem("movie");
 
       // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
-      window.location.href = "pages/login.html";
+      window.location.href = "logIn.html";
     });
   }
 });
