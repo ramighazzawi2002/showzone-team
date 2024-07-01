@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               <div class="userinf" id="userComment-${key}">
                   <div class="coomentsDD">
                       <img class="userimg" src="../images/profile-circle-icon-512x512-zxne30hp.png" alt="User Image">
-                      <p class="user-name1">${firstName}</p>
+                      <p class="user-name1">${commentData.firstName}</p>
                       <p class="commentslorem2">${commentData.comment}</p>
                       <button class="reply-button" id="reply-${key}">Reply</button>
                   </div>
@@ -152,7 +152,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                   <button class="submit-reply" id="submit-reply-${key}">Submit Reply</button>
               </div>
           `;
+         
 
+          console.log(commentData)
           commentsContainer.appendChild(commentElement);
 
           // Attach event listeners for reply button
@@ -178,6 +180,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 await set(newReplyRef, {
                   reply: replyInput,
                   userId: userId,
+
                 });
                 alert("Reply added successfully");
                 fetchAndDisplayComments(); // Update UI after adding reply
@@ -256,6 +259,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         comment: comment,
         userId: userId,
         movieId: movieId,
+        firstName : firstName
       });
       alert("Comment added successfully");
       fetchAndDisplayComments(); // Update UI after adding comment
@@ -263,7 +267,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       console.error("Error adding comment: ", error);
     }
   });
-
+   
   fetchAndDisplayComments(); // Initial fetch and display of comments
 });
 
