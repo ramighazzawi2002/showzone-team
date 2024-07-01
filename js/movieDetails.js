@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!firstName) {
     window.location.href = "../pages/logIn.html";
   }
+  if (firstName) {
+    if (Log_In_js) Log_In_js.style.display = "none";
+    if (Logo_user_2) Logo_user_2.style.display = "inline";
+    }
+  
 
   if (Log_Out_user) {
     Log_Out_user.addEventListener("click", function () {
