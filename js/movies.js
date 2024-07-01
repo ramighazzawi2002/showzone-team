@@ -100,7 +100,7 @@ fetch("https://api.tvmaze.com/shows")
 
         const content = `
         <div style = "margin:0; position:relative">
-          <a href="pages/movieDetails.html">
+          <a href="movieDetails.html">
           <img src="${ele.image}" alt="${
           ele.name
         }" style="width:100%; height:100%;">
@@ -118,7 +118,7 @@ fetch("https://api.tvmaze.com/shows")
         `;
         card.innerHTML = content;
         card.onclick = function () {
-          location.href = "pages/movieDetails.html";
+          location.href = "movieDetails.html";
         };
         container.lastElementChild.appendChild(card);
         card.addEventListener("click", () => {
