@@ -158,6 +158,7 @@
 }
 .hero_sections {
   margin-top: -16px;
+  background-attachment: fixed;
 }
 /* Start Footer */
 .footer_home {
