@@ -24,12 +24,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase(app);
-
+sessionStorage.setItem("issuccess2", false);
 const loginForm = document.getElementById("login-form");
 const loginEmail = document.getElementById("email_login");
 const loginPassword = document.getElementById("login_pass");
 const loginButton = document.getElementById("submit");
-
+let Password_logIn_js = document.getElementById("Password_logIn");
+let Email_login_div_js = document.getElementById("Email_login_div");
 loginButton.addEventListener("click", async function (event) {
   event.preventDefault();
   const email = loginEmail.value;
@@ -38,17 +39,18 @@ loginButton.addEventListener("click", async function (event) {
   const emailEncoded = email.replaceAll(".", "_"); // Encode email to match the database format
   const emailRef = ref(db, `AllUsers/${emailEncoded}`);
   const emailSnapshot = await get(emailRef);
-    if (emailSnapshot.exists()) {
-      const userData = emailSnapshot.val();
-      if (userData.Password === password) {
-        alert("Login is complete");
-        const firstName = userData.First_Name;
-        sessionStorage.setItem("firstName", firstName); // Save first name in session storage
-        window.location.href = "../index.html";
-      } else {
-        alert("Incorrect password");
-      }
+  if (emailSnapshot.exists()) {
+    const userData = emailSnapshot.val();
+    if (userData.Password === password) {
+      const firstName = userData.First_Name;
+      sessionStorage.setItem("firstName", firstName); // Save first name in session storage
+      sessionStorage.setItem("issuccess2", true);
+      window.location.href = "../index.html";
     } else {
-    alert("Email not found");
+      Password_logIn_js.style.display = "inline";
+      return;
+    }
+  } else {
+    Email_login_div_js.style.display = "inline";
   }
 });

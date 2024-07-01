@@ -212,10 +212,24 @@ body {
 #Passward_p_div {
   display: none;
 }
-#Email_p_div ,#Data_p_div{
+#Email_p_div,
+#Data_p_div,
+#Password_logIn,
+#Email_login_div {
   font-size: 13px;
   color: red;
   display: none;
+}
+#You_are_registered {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 10px 0;
+  background-color: rgb(255, 238, 238);
+  color: black;
+  border: red solid 2px;
+  border-radius: 5px;
 }
 @media (max-width: 730px) {
   .container .cover {
