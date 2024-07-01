@@ -91,6 +91,8 @@ fetch("https://api.tvmaze.com/shows")
           const cardGrid = document.createElement("div");
           cardGrid.className = "card-grid";
           container.appendChild(cardGrid);
+          cardGrid.setAttribute("data-aos", "fade-up");
+          cardGrid.setAttribute("data-aos-duration", "1000");
         }
 
         const card = document.createElement("div");

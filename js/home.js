@@ -120,6 +120,9 @@ fetch(url)
           batata.innerHTML = arrayyys[i] ?? "";
           cardGrid.className = "card-grid";
           container.appendChild(batata);
+          cardGrid.setAttribute("data-aos", "fade-up");
+          cardGrid.setAttribute("data-aos-duration", "1000");
+
           container.appendChild(cardGrid);
           if (i < 6) {
             i++;
