@@ -45,6 +45,7 @@ loginButton.addEventListener("click", async function (event) {
       const firstName = userData.First_Name;
       sessionStorage.setItem("firstName", firstName); // Save first name in session storage
       sessionStorage.setItem("issuccess2", true);
+      sessionStorage.setItem("id", emailEncoded);
       window.location.href = "../index.html";
     } else {
       Password_logIn_js.style.display = "inline";
