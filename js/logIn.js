@@ -49,9 +49,6 @@ loginButton.addEventListener("click", async function (event) {
         alert("Incorrect password");
       }
     } else {
-      alert("Incorrect password");
-    }
-  } else {
     alert("Email not found");
   }
 });
