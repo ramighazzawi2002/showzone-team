@@ -193,7 +193,10 @@ document.addEventListener("DOMContentLoaded", async function () {
               .addEventListener("click", async () => {
                 await remove(ref(db, `comments/${movieId}/${key}`));
                 document.getElementById(`userComment-${key}`).remove();
+                location.reload()
+
               }); 
+
 
             document
               .getElementById(`edit-${key}`)
@@ -226,10 +229,14 @@ document.addEventListener("DOMContentLoaded", async function () {
                       <p class="commentslorem2">${replyData.reply}</p>
                   </div>
               `;
+
               repliesContainer.appendChild(replyElement);
+
             });
           }
+
         });
+
       } else {
         console.log("No comments found");
       }
