@@ -1,9 +1,34 @@
 const firstName = sessionStorage.getItem("firstName");
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  const Log_In_js = document.getElementById("Log_In");
+  const Logo_user_2 = document.getElementById("Logo_user_2");
+  if (!firstName) {
+    window.location.href = "../pages/logIn.html";
+  }
+
+  if (Log_Out_user) {
+    Log_Out_user.addEventListener("click", function () {
+      // إزالة بيانات المستخدم من sessionStorage
+      sessionStorage.removeItem("firstName");
+      sessionStorage.removeItem("issuccess");
+      sessionStorage.removeItem("issuccess2");
+      sessionStorage.removeItem("movie");
+
+      // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+      window.location.href = "../pages/logIn.html";
+    });
+  }
+});
+
+
+
+
 function retrieveData() {
     const item = JSON.parse(sessionStorage.getItem('movie')); 
     const userId = sessionStorage.getItem("id");
+    
        if (!item) {
        console.error("No movie data found in sessionStorage");
        return;
@@ -84,6 +109,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   const commentInput = document.getElementById("comment-input");
   const commentsContainer = document.getElementById("cont");
 
+
+
   async function fetchAndDisplayComments() {
     commentsContainer.innerHTML = ""; // Clear previous comments
     try {
@@ -101,8 +128,8 @@ document.addEventListener("DOMContentLoaded", async function () {
           commentElement.innerHTML = `
               <div class="userinf" id="userComment-${key}">
                   <div class="coomentsDD">
-                      <img class="userimg" src="" alt="User Image">
-                      <p class="user-name1">${commentData.userId}</p>
+                      <img class="userimg" src="../images/profile-circle-icon-512x512-zxne30hp.png" alt="User Image">
+                      <p class="user-name1">${firstName}</p>
                       <p class="commentslorem2">${commentData.comment}</p>
                       <button class="reply-button" id="reply-${key}">Reply</button>
                   </div>
@@ -166,7 +193,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               .addEventListener("click", async () => {
                 await remove(ref(db, `comments/${movieId}/${key}`));
                 document.getElementById(`userComment-${key}`).remove();
-              });
+              }); 
 
             document
               .getElementById(`edit-${key}`)
@@ -180,7 +207,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     `#userComment-${key} .commentslorem2`
                   ).textContent = newComment;
                 }
-              });
+              }); 
           }
 
           // Fetch and display replies
@@ -194,8 +221,8 @@ document.addEventListener("DOMContentLoaded", async function () {
               replyElement.id = replyKey;
               replyElement.innerHTML = `
                   <div class="userinf">
-                      <img class="userimg" src="" alt="User Image">
-                      <p class="user-name1">${replyData.userId}</p>
+                      <img class="userimg" src="../images/profile-circle-icon-512x512-zxne30hp.png" alt="User Image">
+                      <p class="user-name1">${firstName}</p>
                       <p class="commentslorem2">${replyData.reply}</p>
                   </div>
               `;
@@ -234,24 +261,3 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
-  const Log_In_js = document.getElementById("Log_In");
-  const Logo_user_2 = document.getElementById("Logo_user_2");
-  if (!firstName) {
-    window.location.href = "../pages/logIn.html";
-  }
-
-  if (Log_Out_user) {
-    Log_Out_user.addEventListener("click", function () {
-      // إزالة بيانات المستخدم من sessionStorage
-      sessionStorage.removeItem("firstName");
-      sessionStorage.removeItem("issuccess");
-      sessionStorage.removeItem("issuccess2");
-      sessionStorage.removeItem("movie");
-
-      // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
-      window.location.href = "../pages/logIn.html";
-    });
-  }
-});
