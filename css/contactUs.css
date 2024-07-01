@@ -17,7 +17,7 @@ body {
   width: 40%;
   background-color: #bceeec;
   padding: 20px;
-  display: flex;
+  /* display: flex; */
 }
 
 .contact-us .left ul {
@@ -106,8 +106,8 @@ ul li {
 }
 
 ul {
-  margin-top: 250px;
-  margin-left: 70px;
+  margin-top: 180px;
+  margin-left: 0;
 }
 
 svg {
