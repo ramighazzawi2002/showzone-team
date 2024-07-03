@@ -15,7 +15,7 @@ body {
 
 .contact-us .left {
   width: 40%;
-  background-color: #bceeec;
+  background-color: #000000;
   padding: 20px;
   /* display: flex; */
 }
@@ -78,7 +78,7 @@ body {
   outline: none;
   padding: 10px 20px;
   border-radius: 20px;
-  color: #000000;
+  color: #ffffff;
   display: block;
   margin: auto;
   cursor: pointer;
@@ -92,7 +92,7 @@ body {
 }
 a {
   text-decoration: none;
-  color: #000000;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -115,7 +115,15 @@ svg {
   top: 0;
   right: 0;
 }
-
+#Done {
+  display: none;
+  background-color: rgba(21, 255, 0, 0.306);
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px solid green;
+  border-radius: 5px;
+}
 @media screen and (max-width: 840px) {
   .contact-us {
     flex-direction: column;
