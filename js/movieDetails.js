@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const Log_In_js = document.getElementById("Log_In");
   const Logo_user_2 = document.getElementById("Logo_user_2");
@@ -66,17 +70,18 @@ function retrieveData() {
      newDiv.classList.add('user-card');
  
      newDiv.innerHTML = `
+     
        <div class="movie-poster">
          <img src="${item.image}" alt="Movie Poster" class="imgposter">
-         <button class="play-button">▶</button>
        </div>
+       <div class="conatinermovieDet">
        <div class="movie-info">
          <h1 class="h1namemovie">${item.name}</h1>
          <div class="iconsposter">
            <i class="fa fa-bookmark"></i>
            <i class="fa fa-heart"></i>
            <i class="fa fa-share"></i>
-           <span class="rating">:star: ${item.rating} | 350k</span>
+           <span class="rating">⭐${item.rating} | 350k</span>
          </div>
        </div>
        <div class="detailsmovie">
@@ -90,6 +95,7 @@ function retrieveData() {
            <p class="discussioovie">${item.summary}</p>
     
          </div>
+         </div>
        </div>
      `;
  
@@ -98,6 +104,10 @@ function retrieveData() {
  }
  
  retrieveData(); 
+
+
+
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getDatabase,
@@ -127,23 +137,49 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const userId = sessionStorage.getItem("id");
 const movieId = JSON.parse(sessionStorage.getItem("movie")).id;
+console.log('userId')
+console.log(userId)
+console.log(movieId) ; // id movie (1,2,3,...)
+
+//ندما تكتب كود جافاسكريبت يتفاعل مع عناصر الـ HTML 
+//من المهم التأكد من أن تلك 
+// قد تم تحميلها بالكامل قبل محاولة التفاعل معها.
+
+
+
 
 document.addEventListener("DOMContentLoaded", async function () {
   const submitButton = document.getElementById("submit-comment");
   const commentInput = document.getElementById("comment-input");
   const commentsContainer = document.getElementById("cont");
 
+  // و ظيفة الفنكشن جلب التعليقات المخزنه ب الفاير 
+  // و عرضها على الصفحة يتم تنفيذ هذه الوظيفة عند 
+  // لعرض التعليثات اموجودة قبل بالفاير بيس 
+  // وكمان عشان بس اضيف تعليق جديد او رد 
 
-
-  async function fetchAndDisplayComments() {
-    commentsContainer.innerHTML = ""; // Clear previous comments
+  async function fetchAndDisplayComments() { 
+    // test to know is i am in fetchAndDisplayComments()
+    let TestFerchScope = 1 ;
+    commentsContainer.innerHTML = ""; // بفرغ الكونتينر عشان ما يكرر عند الاسترجاع
+    
+    
     try {
+      // movieId from session storage 
+      // child للوصول إلى مسار فرعي محدد.
       const snapshot = await get(child(ref(db), `comments/${movieId}`));
       if (snapshot.exists()) {
-        const data = snapshot.val();
-        const keys = Object.keys(data);
-        keys.forEach(key => {
-          const commentData = data[key];
+        const data = snapshot.val(); // استرجاع الداتا من الفاير
+        const keys = Object.keys(data); // .key() static method
+        keys.forEach(key => {  //foreach : HOF edit on array 
+          const commentData = data[key]; // كل الداتا للافلام من السيشن ستوريج 
+           // key == user id المخزنه بالفايربيس
+          console.log('data') // بترجعلي الداتا مع اليوزر ايدي
+          console.log(data);
+          console.log("const commentData = data[key]; : ")
+          console.log(commentData); // بدون يوزر ايدي بترجعلي الداتا 
+          // الهدف انه ارجع لكل يوزر ايدي لحاله !!
+
           const commentElement = document.createElement("div");
           commentElement.className = "comment";
           commentElement.id = key;
@@ -159,6 +195,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   </div>
                   ${
                     commentData.userId === userId
+                       // if user id in session == in firebase
                       ? `
                   <div class="EditDel">
                       <button class="edit-comment1" id="edit-${key}">Edit</button>
@@ -167,7 +204,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                   
                   `
-                      : ""
+                      : ""  // اذا لأ اعمللي اياها فاضية 
                   }
               </div >
               <div class="replies" id="replies-${key}"></div>
@@ -175,32 +212,36 @@ document.addEventListener("DOMContentLoaded", async function () {
                   <textarea class="reply-input" id="reply-input-${key}" placeholder="Leave a reply..."></textarea>
                   <button class="submit-reply" id="submit-reply-${key}">Submit Reply</button>
               </div>
-          `;
+              
+          `;// بدي اضيف شرط ال 
+            // if لل ديليت هون 
          
+                  console.log(commentData.userId);
+                  console.log(userId);
+          console.log('commentData == data[key] == obj');
+           console.log(commentData) ;
 
-          console.log(commentData)
           commentsContainer.appendChild(commentElement);
 
-          // Attach event listeners for reply button
-          document
-            .getElementById(`reply-${key}`)
-            .addEventListener("click", () => {
+          // لما اعمل كليك اعمللي الريبلاي 
+          document.getElementById(`reply-${key}`).addEventListener("click", () => {
+            // بسترجع كود html الي فوق 
               document.getElementById(`reply-section-${key}`).style.display =
                 "block";
             });
 
           // Attach event listener for submit reply button
-          document
-            .getElementById(`submit-reply-${key}`)
-            .addEventListener("click", async () => {
-              const replyInput = document
-                .getElementById(`reply-input-${key}`)
-                .value.trim();
-              if (!replyInput) return;
+          document.getElementById(`submit-reply-${key}`).addEventListener("click", async () => {
+                const replyInput = document.getElementById(`reply-input-${key}`).value.trim();
+                console.log(key) // user id 
+                console.log('replyInput')
+                console.log(replyInput) // reply we have add  !!
+              if (!replyInput) return; // وقف وما تضيف اي ريبلاي 
               try {
-                const newReplyRef = push(
-                  ref(db, `comments/${movieId}/${key}/replies`)
+                const newReplyRef = push(ref(db, `comments/${movieId}/${key}/replies`)
                 );
+                console.log("newReplyRef");
+                console.log(newReplyRef) // obj speecial to firebase
                 await set(newReplyRef, {
                   reply: replyInput,
                   userId: userId,
@@ -215,9 +256,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
           // Attach event listeners for edit and delete buttons
           if (commentData.userId === userId) {
-            document
-              .getElementById(`delete-${key}`)
-              .addEventListener("click", async () => {
+            document.getElementById(`delete-${key}`).addEventListener("click", async () => {
                 await remove(ref(db, `comments/${movieId}/${key}`));
                 document.getElementById(`userComment-${key}`).remove();
                 location.reload()
@@ -225,9 +264,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               }); 
 
 
-            document
-              .getElementById(`edit-${key}`)
-              .addEventListener("click", async () => {
+            document.getElementById(`edit-${key}`).addEventListener("click", async () => {
                 const newComment = prompt("Enter new comment");
                 if (newComment) {
                   await update(ref(db, `comments/${movieId}/${key}`), {
@@ -240,7 +277,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               }); 
           }
 
-          // Fetch and display replies
+          // get and display replies
           if (commentData.replies) {
             const replyKeys = Object.keys(commentData.replies);
             const repliesContainer = document.getElementById(`replies-${key}`);
@@ -251,11 +288,14 @@ document.addEventListener("DOMContentLoaded", async function () {
               replyElement.id = replyKey;
               replyElement.innerHTML = `
                   <div class="userinf">
+                  <div class="commentsDD">
                       <img class="userimg" src="../images/profile-circle-icon-512x512-zxne30hp.png" alt="User Image">
                       <p class="user-name1">${firstName}</p>
                       <p class="commentslorem2">${replyData.reply}</p>
                   </div>
+                  </div>
               `;
+              // شرط الديليت و الايديت 
 
               repliesContainer.appendChild(replyElement);
 
@@ -274,11 +314,15 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   submitButton.addEventListener("click", async function (e) {
     e.preventDefault();
-    const comment = commentInput.value.trim();
+    const comment = commentInput.value.trim(); // بتشيل السبيس بالسترنغ
     if (!comment) return;
-
+   // set 
     try {
       const newCommentRef = push(ref(db, `comments/${movieId}`));
+      console.log('newCommentRef')
+      console.log(newCommentRef) // obj : comment : .... ,
+                                 //  firstname : ... , movieId: ...
+
       await set(newCommentRef, {
         comment: comment,
         userId: userId,
@@ -286,11 +330,38 @@ document.addEventListener("DOMContentLoaded", async function () {
         firstName : firstName
       });
       alert("Comment added successfully");
-      fetchAndDisplayComments(); // Update UI after adding comment
+
+      // console.log("Test if i am in fetch")
+      // console.log(TestFerchScope);
+      // ReferenceError: TestFerchScope is not defined
+
+      fetchAndDisplayComments(); 
+
+      // و ظيفة الفنكشن جلب التعليقات المخزنه ب الفاير 
+      // و عرضها على الصفحة يتم تنفيذ هذه الوظيفة عند 
+     // لعرض التعليثات اموجودة قبل بالفاير بيس 
+     // وكمان عشان بس اضيف تعليق جديد او رد 
     } catch (error) {
       console.error("Error adding comment: ", error);
     }
   });
-   
-  fetchAndDisplayComments(); // Initial fetch and display of comments
+   // و ظيفة الفنكشن جلب التعليقات المخزنه ب الفاير 
+  // و عرضها على الصفحة يتم تنفيذ هذه الوظيفة عند 
+  // لعرض التعليثات اموجودة قبل بالفاير بيس 
+  // وكمان عشان بس اضيف تعليق جديد او رد 
+
+  fetchAndDisplayComments(); // اول مره استرجعت قيمة الفنكشن 
 });
+
+
+
+
+// for (0,-10) odd 
+let x = -10 ;
+for(i = 0 ; i > x ; i-- ){
+  if(x % 2 == 0){
+    break ;
+  }else{
+    console.log(x) ;
+  }
+}

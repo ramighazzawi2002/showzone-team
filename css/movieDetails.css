@@ -125,60 +125,70 @@
 /* End NavBar */
 
   body{
-    background-color: #cbcbcb8b;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
   .containermoviedetails {
-    display: flex;
+    /* display: flex; */
     padding: 10px;
     border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding-top: 40px;
-  margin-top: 50px;
-  background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 40px;
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.473);
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 30px;
 }
 
 .movie-poster {
-    flex: 1;
-    margin-right: 20px;
-    background-color: #000000;
+    width: 350px;
+    padding-left:20px ;
+    /* background-color: #000000; */
+}
+.user-card{
+  display: flex;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+
 }
 
-.movie-poster img {
-    width: 100%;
-    height: 600px;
-}
+
 .imgposter{
-  width: 500px; /* Adjust the width */
+  width: 400px; /* Adjust the width */
     height: 450px; /* Adjust the height */
     object-fit: contain; /* Change to contain to keep aspect ratio without cropping */
     border-radius: 10px;
+
+
+}
+.conatinermovieDet{
+  width: 60%;
+  margin-top: 10px;
+  padding-left: 80px;
+
+  
 }
 
-.play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 100%);
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 50%;
-}
 
 .movie-info {
-    flex: 2;
+    display: inline; 
+    
+  
 }
 
 .h1namemovie {
+  padding-top: 50px;
     margin: 0;
     font-size: 24px;
+    font-size: 40px;
+    
 }
 
 .iconsposter {
+  font-size: 16px;
+  padding-top: 20px;
     margin-top: 10px;
     display: flex;
     align-items: center;
@@ -195,7 +205,9 @@
 }
 
 .detailsmovie {
+   font-size: 18px;
     margin-top: 20px;
+    padding-top: 50px;
 }
 
 .details {
@@ -215,6 +227,19 @@
     margin: 0;
 }
 
+@media (max-width: 840px) {
+ 
+  .user-card{
+    flex-wrap: wrap;
+  }
+  .conatinermovieDet{
+    margin-top: 10px;
+    padding-top: 1px;
+    width: 90%;
+    
+  }
+}
+
 
 
 
@@ -226,24 +251,28 @@
   width: 100%;
   margin: 20px 0;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd00;
   border-radius: 10px;
-  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
+
 
 /* Input area for new comments */
 #comment-input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #1d5c5af9;
   border-radius: 5px;
   margin-bottom: 10px;
   font-size: 14px;
   box-sizing: border-box;
+  background-color: #fafafa;
 }
 
 #submit-comment {
-  background-color: #4267B2; /* Facebook blue */
+  background-color: #1d5c5a; /* Facebook blue */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -259,6 +288,9 @@
 /* Container for comments */
 .comments {
   margin-top: 20px;
+  
+}
+.comment{
 }
 
 /* Individual comment container */
@@ -266,19 +298,19 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
   padding: 10px;
-  background-color: white;
+  background-color: #e6eded48;
 }
 
 .userinf {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  border: 2px solid rgba(0, 0, 0, 0.292);
+  border: 2px solid rgba(21, 18, 18, 0.484);
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 7px;
+  background-color: white;
+
 
 }
 .replies .reply .userinf{
@@ -286,11 +318,13 @@
   flex-direction: column;
   justify-content: start;
   align-items:start;
-  background-color:#b1b3b5;
+  background-color:#c1b8b816;
 
 }
-.replies .reply .userinf .user-name1{
+.user-name1{
   font-size: 16px;
+  display: inline-block;
+  
   
 }
 
@@ -299,6 +333,7 @@
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+
 }
 
 .coomentsDD {
@@ -306,23 +341,29 @@
 }
 
 .user-name1 {
+  display: inline-block;
   font-weight: bold;
   margin: 0;
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .commentslorem2 {
   margin: 5px 0;
-  font-size: 14px;
+  font-size: 17px;
+  padding-left:60px ;
 }
 
 .reply-button, .edit-comment1, .delete-comment1 {
   background: none;
   border: none;
-  color: #4267B2;
+  color: #1d5c5a;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 17px;
   margin-right: 10px;
+
+}
+.reply-button{
+  padding-left: 60px;
 }
 
 .reply-button:hover, .edit-comment1:hover, .delete-comment1:hover {

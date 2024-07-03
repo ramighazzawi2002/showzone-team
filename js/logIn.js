@@ -47,6 +47,7 @@ loginButton.addEventListener("click", async function (event) {
       sessionStorage.setItem("issuccess2", true);
       sessionStorage.setItem("id", emailEncoded);
       window.location.href = "../index.html";
+      sessionStorage.setItem("id", emailEncoded);
     } else {
       Password_logIn_js.style.display = "inline";
       return;
