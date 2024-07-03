@@ -170,17 +170,17 @@
   padding: 10px 20px;
   font-size: 16px;
   color: white;
-  background-color: #007bff;
+  background-color: #3dd2cc;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-float: right;
-margin-bottom: 30px;
-width: 20rem;
+  float: right;
+  margin-bottom: 30px;
+  width: 11rem;
 }
 
 .personal-information button:hover {
-  background-color: #0056b3;
+  background-color: #31a39f;
 }
 
 .personal-information .save-changes {
@@ -193,63 +193,64 @@ width: 20rem;
   background-color: #218838;
 }
 
-  body {
-                    font-family: Arial, sans-serif;
-                    margin: 0;
-                    padding: 0;
-                    background-color: #f5f5f5;
-                }
-                
-                .about-us, .our-team {
-                    padding: 50px;
-                    text-align: center;
-                    background-color: white;
-                    margin: 20px auto;
-                    max-width: 800px;
-                    border-radius: 10px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                }
-                
-                h1 {
-                    font-size: 36px;
-                    color: #333;
-                    margin-bottom: 20px;
-                }
-                
-                h2 {
-                    font-size: 28px;
-                    color: #333;
-                    margin-bottom: 10px;
-                }
-                
-                p {
-                    font-size: 16px;
-                    color: #666;
-                    line-height: 1.6;
-                }
-                
-                .team-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-                
-                .team-container img {
-                    width: 100%;
-                    max-width: 600px;
-                    border-radius: 10px;
-                    margin-bottom: 20px;
-                }
-                
-                .team-text {
-                    text-align: left;
-                    max-width: 600px;
-                }
-                
-                .team-text h2 {
-                    text-align: center;
-                }
-                /* Start Footer */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.about-us,
+.our-team {
+  padding: 50px;
+  text-align: center;
+  background-color: white;
+  margin: 20px auto;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.team-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-container img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.team-text {
+  text-align: left;
+  max-width: 600px;
+}
+
+.team-text h2 {
+  text-align: center;
+}
+/* Start Footer */
 .footer_home {
   background-color: #000000;
 }
