@@ -171,8 +171,12 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (snapshot.exists()) {
         const data = snapshot.val(); // استرجاع الداتا من الفاير
         const keys = Object.keys(data); // .key() static method
+        console.log('keys')
+        console.log(keys) // storage in array type of object 
         keys.forEach(key => {  //foreach : HOF edit on array 
-          const commentData = data[key]; // كل الداتا للافلام من السيشن ستوريج 
+          const commentData = data[key]; // كل الداتا للافلام من السيشن ستوريج
+          console.log('key')
+          console.log(key)
            // key == user id المخزنه بالفايربيس
           console.log('data') // بترجعلي الداتا مع اليوزر ايدي
           console.log(data);

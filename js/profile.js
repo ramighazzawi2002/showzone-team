@@ -1,30 +1,31 @@
-const FirstName = sessionStorage.getItem("firstName");
+let cardcomment = document.createElement('div');
+cardcomment.className = "cardcomment"
+let commentsContainer = document.getElementById('commentsContainer');
 document.addEventListener("DOMContentLoaded", function () {
+  const FirstName = sessionStorage.getItem("firstName");
   const Log_In_js = document.getElementById("Log_In");
   const Logo_user_2 = document.getElementById("Logo_user_2");
+  const Log_Out_user = document.getElementById("Log_Out_user");
+
   if (!FirstName) {
     window.location.href = "../pages/logIn.html";
-  }
-  if (FirstName) {
+  } else {
     if (Log_In_js) Log_In_js.style.display = "none";
     if (Logo_user_2) Logo_user_2.style.display = "inline";
-    }
-  
+  }
 
   if (Log_Out_user) {
     Log_Out_user.addEventListener("click", function () {
-      // إزالة بيانات المستخدم من sessionStorage
       sessionStorage.removeItem("firstName");
       sessionStorage.removeItem("issuccess");
       sessionStorage.removeItem("issuccess2");
       sessionStorage.removeItem("movie");
-
-      // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
       window.location.href = "../pages/logIn.html";
     });
   }
 });
 
+// Firebase initialization
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import {
@@ -35,11 +36,11 @@ import {
   update,
   get,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAzRJMUA6qYsRrf-7NNi2KqvzPtaLZRSu0",
   authDomain: "tv-shows-a6dfc.firebaseapp.com",
-  databaseURL:
-    "https://tv-shows-a6dfc-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL: "https://tv-shows-a6dfc-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "tv-shows-a6dfc",
   storageBucket: "tv-shows-a6dfc.appspot.com",
   messagingSenderId: "950780821633",
@@ -52,57 +53,103 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getDatabase(app);
 
-const firstName = document.getElementById("firstName");
-const lastName = document.getElementById("lastName");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const updateFirstName = document.getElementById("updateFirstName");
-const updateLastName = document.getElementById("updateLastName");
-const updateEmail = document.getElementById("updateEmail");
-const updatePassword = document.getElementById("updatePassword");
-const saveChanges = document.getElementById("saveChanges");
-const emailRef = ref(db, `AllUsers/${sessionStorage.getItem("id")}`);
-const emailSnapshot = await get(emailRef);
+document.addEventListener("DOMContentLoaded", async () => {
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const updateFirstName = document.getElementById("updateFirstName");
+  const updateLastName = document.getElementById("updateLastName");
+  const updateEmail = document.getElementById("updateEmail");
+  const updatePassword = document.getElementById("updatePassword");
+  const saveChanges = document.getElementById("saveChanges");
+  const userId = sessionStorage.getItem("id");
 
-if (emailSnapshot.exists()) {
-  const userData = emailSnapshot.val();
-  firstName.value = userData.First_Name;
-  lastName.value = userData.Last_Name;
-  email.value = userData.Email;
-  password.value = userData.Password;
-}
+  if (!userId) {
+    window.location.href = "../pages/logIn.html";
+    return;
+  }
 
-updateFirstName.addEventListener("click", () => {
-  firstName.disabled = false;
-});
+  const emailRef = ref(db, `AllUsers/${userId}`);
+  const emailSnapshot = await get(emailRef);
 
-updateLastName.addEventListener("click", () => {
-  lastName.disabled = false;
-});
+  if (emailSnapshot.exists()) {
+    const userData = emailSnapshot.val();
+    firstName.value = userData.First_Name;
+    lastName.value = userData.Last_Name;
+    email.value = userData.Email;
+    password.value = userData.Password;
+  }
 
-updateEmail.addEventListener("click", () => {
-  email.disabled = false;
-});
-
-updatePassword.addEventListener("click", () => {
-  password.disabled = false;
-});
-
-saveChanges.addEventListener("click", () => {
-  const firstNameValue = firstName.value;
-  const lastNameValue = lastName.value;
-  const emailValue = email.value;
-  const passwordValue = password.value;
-
-  update(ref(db, `AllUsers/${sessionStorage.getItem("id")}`), {
-    First_Name: firstNameValue,
-    Last_Name: lastNameValue,
-    Email: emailValue,
-    Password: passwordValue,
+  updateFirstName.addEventListener("click", () => {
+    firstName.disabled = false;
   });
 
-  firstName.disabled = true;
-  lastName.disabled = true;
-  email.disabled = true;
-  password.disabled = true;
+  updateLastName.addEventListener("click", () => {
+    lastName.disabled = false;
+  });
+
+  updateEmail.addEventListener("click", () => {
+    email.disabled = false;
+  });
+
+  updatePassword.addEventListener("click", () => {
+    password.disabled = false;
+  });
+
+  saveChanges.addEventListener("click", () => {
+    const firstNameValue = firstName.value;
+    const lastNameValue = lastName.value;
+    const emailValue = email.value;
+    const passwordValue = password.value;
+
+    update(ref(db, `AllUsers/${userId}`), {
+      First_Name: firstNameValue,
+      Last_Name: lastNameValue,
+      Email: emailValue,
+      Password: passwordValue,
+    });
+
+    firstName.disabled = true;
+    lastName.disabled = true;
+    email.disabled = true;
+    password.disabled = true;
+  });
+  const commentsContainer = document.getElementById("commentsContainer");
+  const commentsRef = ref(db, `comments`);
+  
+  get(commentsRef).then(snapshot => {
+    if (snapshot.exists()) {
+      const comments = snapshot.val();
+
+      commentsContainer.innerHTML = '';
+      Object.values(comments).forEach(uid => {
+       
+        Object.values(uid).forEach( comment =>{
+          
+          if(comment.userId == userId){
+            cardcomment.innerHTML +=`
+                        <p class="comment-username"> Movie Id :  ${comment.movieId}</p>
+
+            <p class="comment-username"> User Name :  ${comment.firstName}</p>
+              <p class="comment-text">comments : ${comment.comment}</p>`
+
+              commentsContainer.appendChild(cardcomment)
+          }
+         
+        })
+     
+      });
+    
+    } else {
+      commentsContainer.innerHTML = '<p>No comments found</p>';
+    }
+  }).catch(error => {
+    console.error('Error fetching comments:', error);
+  });
+
+  const viewCommentsButton = document.getElementById("viewComments");
+  viewCommentsButton.addEventListener("click", () => {
+    window.location.href = "../";
+  });
 });

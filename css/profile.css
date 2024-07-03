@@ -264,3 +264,46 @@ width: 20rem;
   margin-bottom: 0;
 }
 /* End Footer */
+
+.mycomment{
+  padding-left: 350px;
+
+}
+.commentsContainer{
+  background-color: #000000;
+
+
+}
+.cardcomment{
+  background-color: white;
+  width: 53%;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 30px;
+  margin-left: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.comment-username {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.comment-text {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+@media (max-width: 768px) {
+  .mycomment {
+    padding-left: 20px;
+  }
+  .cardcomment {
+    width: 90%;
+    margin-left: 20px;
+    padding: 20px;
+  }
+}
